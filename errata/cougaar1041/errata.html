@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Cougaar 10.4.1 Errata</title>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+<h1>Errata for Cougaar 10.4.1 </h1>
+<br>
+<i>The following infos/problems/workarounds were detected/posted after Cougaar 10.4.1 was released.<br>
+</i><br>
+<h2>Issues:</h2>
+<ul>
+  <li>When using Service Discovery and the new OPLAN mechanism, you
+  must wait for all superior-subordinate relationships to by fully
+  created, before sending the GLS task. To be safe, wait until all
+  Nodes are idle (using top / Task Manager), before sending the
+  task. A symptom of not waiting long enough is messages about "No
+  Subsistence Provider" or other such message. See bug 2990.</li>
+  <li>There have been reports of the OPLAN failing to propagate, in
+  situations where we also see some messages about missing providers
+  (as in the above). See bug 3011.</li>
+  <li>Some agents are mis-configured in 1AD societies to do
+  MaintainInventory, when they have no inventory to maintain. The
+  result is un-confident MaintainInventory Tasks.</li>
+  <li>With the new OPLAN propagation mechanism, the OPLAN Edit Servlet
+  must be loaded at every agent in the society, and each agent's oplan
+  must be individually edited. Bug 3006</li>
+  <li>Some Java predicates in AggAgents are not correctly converted to
+  XML. Bug 3005</li>
+  <li>Some AggAgent code uses == to compare Enums that have been
+  serialized, and thus require .equals instead Bug 3003</li>
+  <li>WP bind/rebinds may squash each other, resulting in a logged
+  error message like: <pre>
+20:44:57,619 ERROR - CommunityManager - REAR-A: Unable to (re)bind agent as 
+community manager: error=Rebind failed: (response oid=30411007 req=(rebind 
+entry=(name=Enclave1Security-COMM.comm type=community uri=agent:///REAR-A 
+cert=null_cert) oid=13451931 bypassCache=false cacheOnly=false) result=(rebind 
+entry=(name=Enclave1Security-COMM.comm type=community uri=agent:///JSRCMDSE 
+cert=null_cert) oid=16686663 bypassCache=false cacheOnly=false)) agent=REAR-A 
+community=Enclave1Security-COMM 
+java.lang.RuntimeException: Rebind failed: (response oid=30411007 req=(rebind 
+entry=(name=Enclave1Security-COMM.comm type=community uri=agent:///REAR-A 
+cert=null_cert) oid=13451931 bypassCache=false cacheOnly=false) result=(rebind 
+entry=(name=Enclave1Security-COMM.comm type=community uri=agent:///JSRCMDSE 
+cert=null_cert) oid=16686663 bypassCache=false cacheOnly=false)) 
+        at 
+org.cougaar.core.service.wp.WhitePagesService.rebind(WhitePagesService.java:226) 
+        at 
+org.cougaar.community.manager.CommunityManager.assertCommunityManagerRole(CommunityManager.java:424)
+  </pre> 
+
+  See bug 2902.</li>
+  <li>When running the GLSInit client, users occasionaly see STDOUT
+  errors like: <pre>Jun 2, 2003 4:39:58 PM java.util.prefs.FileSystemPreferences$3 run 
+WARNING: Could not create system preferences directory. System preferences are 
+unusable. 
+Jun 2, 2003 4:40:29 PM java.util.prefs.FileSystemPreferences 
+checkLockFile0ErrorCode 
+WARNING: Could not lock System prefs.Unix error code
+  1216916824. </pre><br>
+  To work around this, look for the file:
+  ~/.java/.userPrefs/.user.lock.[username] and delete this file. See
+  bug 2991.</li>
+</ul>
+<br>
+<h2>New Bugs:</h2>
+<ul>
+  <li>none identified
+      </li>
+</ul>
+</body>
+</html>
+
+
+
+
+
+
