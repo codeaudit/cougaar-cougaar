@@ -12,9 +12,21 @@
 </i><br>
 <h2>Issues:</h2>
 <ul>
-  <li>Bug 3726: If a target of your relay is an ABA, it is possible to get a flood of messages. To avoid problems, ensure the targets list at the target agents is empty, or your RElay.Target implementation is a different class than your Relay.Source.</li>
-  <li>Bug 3782: If you restart a society from persistence, some odd "orphan" tasks seem to appear. This is very rare.</li>
-  <li>Bug 3881: INI file support will likely be dropped for release 12.0.</li>
+  <li><a href="http://bugs.cougaar.org/show_bug.cgi?id=3726">Bug 3726</a>:
+      If a target of your relay is an ABA, it is possible to get a
+      flood of messages. To avoid problems, ensure the targets list
+      at the target agents is empty, or your Relay.Target
+      implementation is a different class than your Relay.Source.</li>
+  <li><a href="http://bugs.cougaar.org/show_bug.cgi?id=3782">Bug 3782</a>:
+      If you restart a society from persistence, some odd "orphan"
+      tasks seem to appear. This is very rare.</li>
+  <li><a href="http://bugs.cougaar.org/show_bug.cgi?id=3881">Bug 3881</a>:
+      INI file support will likely be dropped for release 12.0.</li>
+  <li><a href="http://bugs.cougaar.org/show_bug.cgi?id=3907#c7">Bug 3907</a>:
+      Replicated WP servers may fail to find their peer servers at
+      startup.  This can occur if the initial WP server entries
+      contain partial information, for example if they are non-empty
+      but lack the required MTS certificate fields.</li>
 </ul>
 <br>
 <h2>New Bugs:</h2>
