@@ -35,6 +35,7 @@ This bug occurs if an agent runs with persistence, is killed, and then restarted
 This is bug #1936, which will be fixed in the next release.
 <p>
 
+
 <h3>Windows AppServer kill doesn't automatically kill child processes:</h3>
 Bug #1662 is due to a Windows JVM change from JDK 1.3 to 1.4.  If the user "CTRL-C"s an AppServer that is currently running nodes, these child nodes are not automatically killed by the dying AppServer JVM process.
 <p>
@@ -70,6 +71,16 @@ on these bugs, see the CSMART Release Notes for that release.
 </ul>
 <p>
 
+<h3>Following bugs in 9.4.1 were fixed in 9.4.1.1:</h3>
+<ul>
+  <li>Bug 1803: Query/DetailRequest can result in cross agent references to the same object. This primarily affected the propagation of OrgActivity changes.</li>
+<p>
+
 </body>
 </html>
+
+
+
+
+
 
