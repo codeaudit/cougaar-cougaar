@@ -41,5 +41,35 @@ Bug #1662 is due to a Windows JVM change from JDK 1.3 to 1.4.  If the user "CTRL
 Before killing an AppServer, Windows users should be careful to either make sure that CSMART has killed all the nodes on that AppServer.  The Windows TaskManager can also be used to check for running "zombie" nodes and kill them.
 <p>
 
+<h3>Various CSMART Usability issues:</h3>
+A number of relatively minor CSMART usability issues were discovered. Unless
+otherwise indicated, these will be fixed in the next patch release. For details
+on these bugs, see the CSMART Release Notes for that release.
+<p>
+<ul>
+  <li>Bug 1944: The Message Transport Aspects should now be loaded through recipes, and not by Global Command Line Arguments. Although this -D property is not harmful, it is no longer the preferred mechanism. It should be removed from Experiment's Global Command Line Arguments, and from your AppServer server.props file.</li>
+  <li>Bug 1885: If you set a property to null in the Configuration Builder, then change it to non-null, you get a NullPointerException.</li>
+  <li>Bug 1883: You should not be able to delete the AssetData folder on an Agent,
+     since there is no way to add it back. </li>
+  <li>Bug 1902: If you specify a bad community.xml file to load, you may get an NPE.</li>
+  <li>Bugs 1882, 1890, 1894, 1900, 1902, 1895, 1899: Trim white space off of agent name, node names, host names, community names, and command line arguments.</li>
+  <li>Bug 1905: Do not allow empty community Attibute IDs.</li>
+  <li>Bugs 1888, 1916, 1906, 1899, 1895, 1893, 1894, 1926, 1928, 1930, 1912, 1923, 1928: Treat closing a dialog box like hitting Cancel.</li>
+  <li>Bugs 1894, 1895, 1899, 1906, 1916: When asking for a file to read, complain about un-readable or nonexistent file.</li>
+  <li>Bugs 1900, 1882, 1890, 1894: Treat an empty agent, host, node, community, or file name like the user entered nothing.</li>
+  <li>Bugs 1880, 1913: Clean up some help files.</li>
+  <li>Bugs 1916, 1919, 1918, 1907, 1881, 1896: Put reasonable titles on dialogs.</li>
+  <li>Bug 1904: Correct an erroneous error-check when editing communities.</li>
+  <li>Bug 1874: The table of -D arguments in the Console's Node Info screen should not be editable.</li>
+  <li>Bugs 1925, 1910: Fix some help menu items.</li>
+  <li>Bugs 1921, 1922: Limit some debug output in the Society Monitor.</li>
+  <li>Bug 1919: The Society Monitor Save and Save As do not work consistently.</li>
+  <li>Bug 1878, 1914: Society Monitor Experiment or URL to monitor dialogs need cleanup.</li>
+  <li>Bugs 1888, 1892: If an experiment has no OrgGroups (none currently do), do not show the OrgGroups section of the Thread dialog.</li>
+  <li>Bugs 1912, 1923, 1928: Provide defaults in input dialogs, and error messages on bad input.</li>
+</ul>
+<p>
+
 </body>
 </html>
+
