@@ -44,6 +44,67 @@ Bug #1662 is due to a Windows JVM change from JDK 1.3 to 1.4.  If the user "CTRL
 Before killing an AppServer, Windows users should be careful to either make sure that CSMART has killed all the nodes on that AppServer.  The Windows TaskManager can also be used to check for running "zombie" nodes and kill them.
 <p>
 
+<h3>CSMART Performance issues and runtime bugs:</h3>
+CSMART Experiment saving turns out to be quite slow, particularly when
+many recipes are included. We are actively addressing this on several
+fronts. In addition, a number of issues have been identified, in
+particular with the new Component Collection recipes.
+<p>
+<ul>
+  <li>Bug 2002: It is currently very slow to save Experiments in
+  CSMART. We expect multiple changes to address this in the very near
+  future. In post 9.4.1.1 releases, these include:
+  <ul>
+    <li>We have changed the way experiment recipes are saved. If you
+    have a recipe target query that looks at Agent relationships,
+    Property Groups, or Plugins and their arguments, you must now edit
+    your CSMART startup script to set a new -D argument to allow these
+    recipes to find their targets correctly. The change is to not save
+    to the database the changes that each recipe makes until all
+    recipes have been applied. This is a significant performance
+    improvement, and will not impede most users. Those users who
+    require more complex recipe target queries however must disable
+    this imrovement.</li>
+    <li>We have added a time that logs at SHOUT level when starting to
+    save an experiment, and then the total number of seconds taken when
+    the save is complete. (bug 2015).</li>
+  </ul>
+  </li>
+  <li>The CSMART 1AD society definitions have been slightly
+  modified. This change requires re-running
+  csmart/data/database/scripts/mysql/load_1ad_mysql.[sh/bat] (bug
+  1988) </li>
+  <li>The following issue has <b>not yet been addressed</b>: 
+  Component Collection recipes fail on save with a "Duplicate
+  Entry" warning. This renders these recipes unusable. (Bugs 1977 and 1810) </li>
+  <li>You cannot import the same recipe twice into a database in order
+  to correct its definition. To work around this issue, replace all
+  occurences of "INSERT INTO" with "REPLACE INTO" in you .sql export
+  files. (bug 2004, 2025) </li>
+  <li>Loading communities from old-style csv files would fail when an
+  Assembly ID was provided. The scripts have been corrected. (bug
+  1995)</li>
+  <li>In a Complete Agent or Component Collection recipe, naming an
+  Agent the same as the recipe will cause problems on save. New
+  versions will not allow this. (Bug 2021).</li>
+  <li>If you try to add more than 11 parameters to a Component, the
+  additional parameter values simply over-write the 11th
+  parameter. Again, this is fixed in post-9.4.1.1 builds. (bug
+  2009)</li>
+  <li>In rare circumstances, Null Pointer exceptions were possible
+  when loading recipes from the database, which have been
+  addressed. (bug 2000).</li>
+  <li>Parsing of the HomeLocation in the MilitaryOrgPG was failing for
+  certain values. This too has been addressed (bug 2012).</li>
+  <li>Avoid some additional very rary Null Pointer Exceptions when
+  your ApplicationServer dies unexpectedly. (bug 2008) </li>
+  <li>The CSMART startup script csmart/bin/CSMART erroneously ran
+  CSMART through jdb. (bug 2022).</li>
+  <li>Fixed a small typo in a comment in dumped INI files. (bug
+  1958)</li>
+</ul>
+<p>
+
 <h3>Various CSMART Usability issues:</h3>
 A number of relatively minor CSMART usability issues were discovered. Unless
 otherwise indicated, these will be fixed in the next patch release. For details
