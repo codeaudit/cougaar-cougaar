@@ -12,17 +12,25 @@
 </i><br>
 <h2>Issues:</h2>
 <ul>
-  <li>none identified</li>
+  <li>Tutorials build scripts do not work in the released
+  10.4.6. Error message is something like: <pre>Exception in thread
+  "main" java.lang.NoClassDefFoundError:
+  org/cougaar/tools/build/AssetWriter</pre>. To fix this, simply copy
+  clib/build.jar to the /lib directory.</li>
 </ul>
 <br>
 <h2>New Bugs:</h2>
 <ul>
-  <li>A rare deadlock is possible in the quo code (bug 3390). </li>
+  <li>A rare deadlock is possible in the quo code (bug 3390). Fixed in
+  CVS.</li>
   <li>Bug 3396: The DomainManager should close the InputStream when it
   is done.</li>
-  <li>Community cache listeners are duplicated (bug 3389).</li>
-  <li>Community search filters not working (bug 3391).</li>
-  <li>Hierarchical community searches are slow (bug 3386).</li>
+  <li>Community cache listeners are duplicated (bug 3389) Fixed in
+  CVS..</li>
+  <li>Community search filters not working (bug 3391). Fixed in
+  CVS.</li>
+  <li>Hierarchical community searches are slow (bug 3386). Fixed in
+  CVS.</li>
   <li>Removed agents not completely removed from WP (bug 3397).</li>
 </ul>
 </body>
