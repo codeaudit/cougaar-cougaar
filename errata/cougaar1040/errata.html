@@ -18,6 +18,7 @@
   <li>Some agents are mis-configured in 1AD societies to do MaintainInventory, when they have no inventory to maintain. The result is un-confident MaintainInventory Tasks.</li>
   <li>We have seen rare occasions where White Pages leases for some agents expire and are never renewed.</li>
   <li>If agents are run from XML files and then moved, they do not correctly rehydrate from persisted definition. See bug 2856.</li>
+  <li>Log4j File appenders specifying log files in non-existent directories do not get used. Additionaly -D log4j configuration arguments prefixed with "org.cougaar.util.log" are ignored. To avoid the latter problem, prefix your logging properties with "org.cougaar.core.logging" instead. (Bug 2923)</li>
 </ul>
 <br>
 <h2>New Bugs:</h2>
