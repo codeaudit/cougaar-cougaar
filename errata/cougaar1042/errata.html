@@ -23,6 +23,9 @@
   (I've seen it once in about 20 runs).  This is Cougaar bug 3155.</li>
   <li>Freezing the society doesn't work properly.  The freeze servlet says "Agent Freezing", but never is
   updated to say that it has completed the freeze.  This is Cougaar bug 3170.</li>
+  <li>cougaar bug 3675: CircularQueue.toArray incorrectly copies
+	elements, causing occasional NPE in topology code on startup.  See bug for fix or ask for a patch release. <br>
+  </li>
 </ul>
 </body>
 </html>
