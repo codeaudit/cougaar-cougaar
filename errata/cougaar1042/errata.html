@@ -17,8 +17,12 @@
 <br>
 <h2>New Bugs:</h2>
 <ul>
-  <li>none identified
-      </li>
+  <li>There is a deadlock when Quiescence reports are turned on.  These are off by default with
+  the Cougaar 10.4.2 distribution. This is Cougaar bug 3168.</li>
+  <li>There is a ConcurrentModificationException in the CommunityManager that occurs infrequently
+  (I've seen it once in about 20 runs).  This is Cougaar bug 3155.</li>
+  <li>Freezing the society doesn't work properly.  The freeze servlet says "Agent Freezing", but never is
+  updated to say that it has completed the freeze.  This is Cougaar bug 3170.</li>
 </ul>
 </body>
 </html>
