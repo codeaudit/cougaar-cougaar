@@ -15,6 +15,16 @@ href="http://bugs.cougaar.org/">Cougaarforge Bugzilla</a>.<br>
 <br>
 <h2>Issues:</h2>
 <ul>
+  <li><a href="http://bugs.cougaar.org/show_bug.cgi?id=3918">Bug 3918</a>:
+      Java 1.5 prints an error:<pre>
+        ERROR [XMLComponentInitializerServiceComponent] - 
+          Unable to load XMLComponentInitializer
+        ..
+        Caused by: javax.xml.transform.TransformerException: line 55:
+          Variable 'wpserver' is multiply defined in the same scope.
+      </pre>
+      See the above bug report for a one-line fix to the
+      "configs/common/SimpleAgent.xsl" template file.
   <li><a href="http://bugs.cougaar.org/show_bug.cgi?id=3726">Bug 3726</a>:
       If a target of your relay is an ABA, it is possible to get a
       flood of messages. To avoid problems, ensure that the targets list
