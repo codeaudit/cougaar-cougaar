@@ -73,6 +73,18 @@ on these bugs, see the CSMART Release Notes for that release.
 </ul>
 <p>
 
+<h3> RSS thread deadlock issue</h3>
+A thread deadlock problem in the RSS was recently detected and
+    corrected.  See Bug 2029.  The fix is checked in as part of the
+    quoSumo.jar, in jars/lib.  You must get the newest version of
+    this jar to prevent this deadlock from locking up the threads of
+    the MetricService.  The command 
+<pre>
+   <code>jar tf quoSumo.jar | grep  VERSION</code>
+</pre>
+should print <code>VERSION_3-0-10_02-08-13_15-49-22</code>  (or later).
+<p>
+
 <h3>Following bugs in 9.4.1 were fixed in 9.4.1.1:</h3>
 <ul>
   <li>Bug 1803: Query/DetailRequest can result in cross agent references to the same object. This primarily affected the propagation of OrgActivity changes.</li>
