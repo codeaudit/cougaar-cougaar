@@ -1,0 +1,150 @@
+The follwing infos/problems/workarounds were detected/posted
+after the current version of Cougaar was built/released:
+
+--- 
+There is an incompatibility between the TPFDD Viewer 
+and the most recent mysql driver jar.  
+This causes the TPFDD Viewer to think that no Datagrabber runs have been collected.
+
+The workaround involves not using the bootstrapper (which would find the most recent mysql jar), 
+and instead explicitly setting the classpath to specify a previous mysql jar.
+
+(Or you could make a one-line change to any of the scripts to add the
+following to the java command line and everything would work:
+        -Dorg.cougaar.class.path=/path/to/oldmysql.jar)
+
+This translates into these steps:
+
+  1) If you don't have it already, download the mm-mysql-2.jar version 2.0.7 from :
+  http://prdownloads.sourceforge.net/mmmysql/mm.mysql-2.0.7-you-must-unjar-me.jar?download
+
+  2) Put this jar somewhere, say in a new directory under the cougaar installation called "alt".
+
+  3) Edit the script runNewTPFDDShell script, either bat or csh version depending on platform.
+     
+        a) If running the bat file, change the line 31 :
+
+        set LIBPATHS=%COUGAAR_INSTALL_PATH%\lib\bootstrap.jar
+
+        to be these lines :
+
+        set LIBPATHS=%COUGAAR_INSTALL_PATH%\alt\mm-mysql-2.jar  <--- note the explicit path to the jar
+        set LIBPATHS=%COUGAAR_INSTALL_PATH%\lib\datagrabber.jar;%LIBPATHS%
+        set LIBPATHS=%COUGAAR_INSTALL_PATH%\lib\core.jar;%LIBPATHS%
+        set LIBPATHS=%COUGAAR_INSTALL_PATH%\lib\util.jar;%LIBPATHS%
+        set LIBPATHS=%COUGAAR_INSTALL_PATH%\sys\chart.jar;%LIBPATHS%
+        set LIBPATHS=%COUGAAR_INSTALL_PATH%\sys\xerces.jar;%LIBPATHS%
+
+        and remove the text that says "org.cougaar.bootstrap.Bootstrapper" from the java call, line 103 or 106, depending on which you are using.  (If you have edited the cougaar rc file to include database information, edit line 106.  See the Datagrabber usage guide for more.)
+        For example, line 106 should now be :
+
+        java -classpath %LIBPATHS% -Duser.timezone=GMT %MYMEMORY% %TPFDD_PROPS% %INSTALL_PATH% %TPFDD_DEBUG% %TPFDD_TIMING% org.cougaar.mlm.ui.newtpfdd.gui.view.NewTPFDDShell
+
+        b) If running the csh version, change line 29 :
+
+        setenv LIBPATHS "${COUGAAR_INSTALL_PATH}/lib/bootstrap.jar"
+
+        to be :
+
+        setenv LIBPATHS "${COUGAAR_INSTALL_PATH}/alt/mm-mysql-2.jar" <--- note the explicit path to the jar
+        setenv LIBPATHS "${LIBPATHS}:${COUGAAR_INSTALL_PATH}/lib/datagrabber.jar"
+        setenv LIBPATHS "${LIBPATHS}:${COUGAAR_INSTALL_PATH}/lib/core.jar"
+        setenv LIBPATHS "${LIBPATHS}:${COUGAAR_INSTALL_PATH}/lib/util.jar"
+        setenv LIBPATHS "${LIBPATHS}:${COUGAAR_INSTALL_PATH}/sys/chart.jar"
+        setenv LIBPATHS "${LIBPATHS}:${COUGAAR_INSTALL_PATH}/sys/xerces.jar"
+
+        and remove the text that says "org.cougaar.bootstrap.Bootstrapper" from the java call, 
+        line 99 or 104, depending on which you are using.  
+        (If you have edited the cougaar rc file to include database information, edit line 104.  
+        See the Datagrabber usage guide for more.)
+        For example, line 104 should now be :
+
+        org.cougaar.mlm.ui.newtpfdd.gui.view.NewTPFDDShell
+
+        Also, if you are not using the cougaar rc file, you should also change line 98 to be :
+
+        ${INSTALL_PATH} ${DB_PROPS} ${TPFDD_PROPS} ${DB_DRIVER} ${TPFDD_DEBUG} ${TPFDD_TIMING} \
+
+
+  4) You should now be able to run the script normally.
+
+---
+Addendum to the Release Notes for Release 9.2.2
+
+  Message Transport Service:
+
+    Removed a redundant API on the Registery interface for looking up the
+    node's address. The NameSupport.getNodeMessageAddress() should be used
+    instead.
+
+    If a client requests the MessageTransportService and is not a
+    MessageTransportClient, the service provider will now throw an
+    IllegalArgumentException instead of returning Null. 
+
+  Thread Service:
+
+    Thread service now returns a Schedulable instead of a
+    Thread. Schedulables are thread proxies from the user's perspective
+    (things which can be started).  From the system perspective the
+    implementation class is the bridge between Schedulers and lava
+    Threads.  Java Threads are only associated with Schedulables as needed
+    (i.e. when the Scheduler allows the Schedulable to run).
+
+    Version 9.4 will include extensive changes to and simplifications of
+    the thread services.
+
+  Topology Service:
+    
+    QoSMonitorService was removed and replaced with the topology service. 
+
+---
+Addendum to the Release Notes for Release 9.2.2
+
+Bug 1313, "Separate topology from MTS"
+Created new "TopologyReaderService" for components to list all agents, hosts, 
+nodes, find out which host an agent is on, etc.  This simplifies the MTS and 
+allows for future agent mobility enhancements.
+
+Bug 1073, "Servlet-loader should pass servlet as the service-requestor"
+Servlets now use the "BlackboardQueryService", which allows better servlet 
+security binding.  Servlets must now use a "setSimpleServletSupport(..)" 
+method instead of a "<classname>(SimpleServletSuport ..)" constructor.
+
+Bug 1290, "Tomcat needs to read from the server.xml for which SSLServer"
+Created new system properties for setting the web-server socket factories.  
+This will be used for NAI custom SSL server configuration.
+
+Bug 1291, "Tomcat SSL should not throw exception when keystore environm"
+Related to bug 1291, which allows a custom socket factory to configure the 
+keystore.
+
+Bug 1163, "Agent Identity Service"
+Integrated new agent crypto identity service into agent and node, and 
+modified the agent to transfer this identity when the agent moves.  The 
+default built-in service provider implementation does nothing and can be 
+overridden by a HIGH-priority component specified in the node ".ini" 
+configuration.
+
+Bug 1358, "Topology manager does not support MTS message address"
+Created new "system" category in the topology service, and modified the MTS 
+to register itself with this category.
+
+Bug 1380, "CSMART topology display must show hostname instead of IP add"
+Modified topology services to use the host's name instead of IP address. 
+
+---
+Addendum to the CSMART Release Notes for the Release 9.2.2
+
+Bug1387: Specific Insertion recipes cannot add Domains or arbitrary
+components. Only Binders & Plugins can be added. This bug is fixed for
+9.4. If you need to add a non-standard component, you should select the
+Society in the workspace, then click "Configure", and add these other
+components by hand.
+
+Bug 1377: Copying certain recipes causes exceptions: To avoid these
+exceptions, you should:
+a) Always include an OrgAsset in Agent Insertion recipes, even if you do
+not need one
+b) Do not use the ServletGroupInsertion recipe to add a non-standard
+servlet. Instead, use the SpecificInsertion recipe.
+
