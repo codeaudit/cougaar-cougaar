@@ -16,10 +16,17 @@
 </ul>
 <br>
 <h2>New Bugs:</h2>
+<h3>Persistence/Rehydration bugs:</h3>
+     The following bugs were observed while persistence was enabled and a supply point agent (47-FSB) was killed and then restarted.   Although the behavior of all agents was not characterized, we expect most "supply thread" agents to exhibit similar behavior as they contain a similar complement of plugins.   Upon rehydration the following known bugs occur:
 <ul>
-  <li>none<br>
+  <li>Bug #1847 - After persistance, no servlet response<br>
+  </li>
+  <li>Bug #1850 - During rehydration - Illegal rescind of a task that is connected to a workflow<br>
+  </li>
+  <li>Bug #1938 - Upon 47-FSB rehydration, negative days_spanned ERROR at 123-MSB<br>
   </li>
 </ul>
+     These bugs occured after quiescence, but 1847 and 1850 were also observed while restarting in the midst of processing.
 <br>
 </body>
 </html>
