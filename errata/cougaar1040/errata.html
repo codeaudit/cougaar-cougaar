@@ -12,12 +12,17 @@
 </i><br>
 <h2>Issues:</h2>
 <ul>
-  <li>none so far</li>
+  <li>Some Log Plugins are not robust to Providers showing up after their first tasks arrive. See bug 1914. The workaround is to always wait (sleep) around 3 minutes after you do SendOplan (aka GetOplanInfo), and before sending GLS.</li>
+  <li>When running 2 Nodes on one Host, under certain JVMs, servlets may fail to load in the second to start. See bug 2921. </li>
+  <li>Some transport tasks are scheduled 1 second into the day before BEST, leading to odd looking inventory charts.</li>
+  <li>Some agents are mis-configured in 1AD societies to do MaintainInventory, when they have no inventory to maintain. The result is un-confident MaintainInventory Tasks.</li>
+  <li>We have seen rare occasions where White Pages leases for some agents expire and are never renewed.</li>
+  <li>If agents are run from XML files and then moved, they do not correctly rehydrate from persisted definition. See bug 2856.</li>
 </ul>
 <br>
 <h2>New Bugs:</h2>
 <ul>
-  <li>none identifier
+  <li>none identified
       </li>
 </ul>
 </body>
