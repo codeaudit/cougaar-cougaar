@@ -68,25 +68,34 @@ particular with the new Component Collection recipes.
     <li>We have added a time that logs at SHOUT level when starting to
     save an experiment, and then the total number of seconds taken when
     the save is complete. (bug 2015).</li>
+    <li>We have made multiple changes to the internals of how CSMART
+    traverses and manipulates data structures. These changes should
+    have no visible impact for users, beyond a speed improvement. See
+    the release notes for details.</li>
   </ul>
   </li>
   <li>The CSMART 1AD society definitions have been slightly
   modified. This change requires re-running
   csmart/data/database/scripts/mysql/load_1ad_mysql.[sh/bat] (bug
   1988) </li>
-  <li>The following issue has <b>not yet been addressed</b>: 
-  Component Collection recipes fail on save with a "Duplicate
-  Entry" warning. This renders these recipes unusable. (Bugs 1977 and 1810) </li>
-  <li>You cannot import the same recipe twice into a database in order
-  to correct its definition. To work around this issue, replace all
-  occurences of "INSERT INTO" with "REPLACE INTO" in you .sql export
-  files. (bug 2004, 2025) </li>
-  <li>Loading communities from old-style csv files would fail when an
-  Assembly ID was provided. The scripts have been corrected. (bug
-  1995)</li>
-  <li>In a Complete Agent or Component Collection recipe, naming an
-  Agent the same as the recipe will cause problems on save. New
-  versions will not allow this. (Bug 2021).</li>
+  <li>Component Collection recipes failed on save with a "Duplicate
+  Entry" warning. (Bug 1977) The same warning appeared occasionally
+  when you changed the name of an agent in a Complete Agent
+  recipe. (Bug 2031). These and related errors (due to bug 1810) have
+  been fixed.</li>
+  <li>Copied Component Collection recipes lost some parameters (bug 2039).</li>
+  <li>Renaming Component Collection recipes lost some components (bug 2040).</li>
+  <li>Delete Complete Agent or Component Collection recipes failed to
+  completely delete the recipe in some cases. This resulted in errors
+  when later importing recipes. (Bug 2032, 2025). Recipes are now
+  fully deleted.</li>
+  <li>You cannot however import the same recipe twice into a database in order
+  to correct its definition. You should instead delete the recipe
+  (through CSMART) from your database before re-importing it. (Bug
+  2004) </li>
+  <li>You may not name an Agent in a Complete Agent or Component
+  Collection recipe the same as the recipe name. You are now forbidden
+  from doing so. (Bug 2021) <li>
   <li>If you try to add more than 11 parameters to a Component, the
   additional parameter values simply over-write the 11th
   parameter. Again, this is fixed in post-9.4.1.1 builds. (bug
@@ -102,6 +111,9 @@ particular with the new Component Collection recipes.
   CSMART through jdb. (bug 2022).</li>
   <li>Fixed a small typo in a comment in dumped INI files. (bug
   1958)</li>
+  <li>Loading communities from old-style csv files would fail when an
+  Assembly ID was provided. The scripts have been corrected. (bug
+  1995)</li>
 </ul>
 <p>
 
