@@ -9,10 +9,50 @@
  
 <h1>Errata for Cougaar 9.4</h1>
  <br>
- <i>The following infos/problems/workarounds were detected/posted after the
-current version of Cougaar was built/released.<br>
+ <i>The following infos/problems/workarounds were detected/posted
+after Cougaar 9.4.0 was released.<br>
  </i><br>
- 
+<h2>Minor Patch releases:</h2>
+<ul>
+<li>
+<b>cougaar-9401</b> Is cougaar 9.4.0 with new versions of core.jar,
+	csmart.jar, and quo.jar.  It contains only patches
+	for the following bugs:
+<ul>
+<li>
+Bug 1596: Allow Agents created from CSMART recipes to run<br>
+ OrgAssets
+created using the AgentInsertionRecipe were missing the ClusterPG and
+ItemIdentificationPG, resulting in runtime Exceptions. To ensure that
+your Agent Insertion recipes work, be sure to open them in the
+Configuration Builder, and "toggle" the value of your Agent name -
+change it to something else, then change it back, and re-save your
+recipe.<br>
+Also note (bug 1594): An exported AgentInsertionRecipe created from a
+relese pre-9.4 will show errors when you first load it from the
+database, but these can be ignored.
+<pre>
+11:48:17,870 ERROR [AgentInsertionRecipe] - Unknown property: Include Item Identification PG=true in component AGG-Agent
+11:48:17,877 ERROR [AgentInsertionRecipe] - Unknown property: Include Org Asset=true in component AGG-Agent
+</pre>
+As above, just be sure to edit your recipe in the ConfigurationBuilder
+and re-save it.
+</li>
+<li>
+Bug 1590: Extensive Name Server processing load<br>
+Diagnosis: Excessive fetching of (topology entity) attributes to
+implement Syscond topology polling. The algorithm is changed to be
+O(N^2). Still not scalable, but blows up less rapidly.
+</li>
+<li>
+Bug 1607: Blackboard timstamp service<br>
+The Timestamp service was erroneously reporting "unknown" for all
+timestamps. This is now fixed.
+</li>
+</ul>
+</li>
+</ul>
+
 <h2>Issues:</h2>
  
 <ul>
@@ -27,25 +67,19 @@ non-functioning, uses. Use the <tt>org.cougaar.core.persist.NotPersistable</tt>
 persistence snapshots. </li>
    <li>CSMART Agent Insertion recipes exported from any release prior to 9.4 
 will give errors on importing into a 9.4 CSMART. These errors will be 
-something like:<pre>
-ERROR [AgentInsertionRecipe] - Unknown property: Include Item 
-Identification PG=true in component AGG-Agent
-11:48:17,877 ERROR [AgentInsertionRecipe] - Unknown property: Include Org
-Asset=true in component AGG-Agent</pre><br>
+something like:
+<pre>
+11:48:17,870 ERROR [AgentInsertionRecipe] - Unknown property: Include Item Identification PG=true in component AGG-Agent
+11:48:17,877 ERROR [AgentInsertionRecipe] - Unknown property: Include OrgAsset=true in component AGG-Agent
+</pre>
 Agent Insertion recipes in 9.4 <i>must</i> include an OrgAsset. So after 
 importing your recipe, edit it, and fill out the newly required fields:
 ItemIdentification, TypeIdentification, etc, if you have not already 
-done so. See bug #1594.  See also below.</li>
+done so. See bug 1594 and the discussion of bug 1596 above..</li>
 </ul>
   
 <h2>New Bugs:</h2>
- 
-<ul>
-   <li>Bug 1596: CSMART Agent Insertion recipe creates bad Agents. At runtime, you will get exceptions, because the OrgAssets it creates lack ClusterPG and ItemIdentifificationPG. This will be fixed for 9.4.1
-   </li>
- 
-</ul>
- <br>
- 
+
+<br>
 </body>
 </html>
