@@ -19,11 +19,13 @@
 <h3>Persistence/Rehydration bugs:</h3>
      The following bugs were observed while persistence was enabled and a supply point agent (47-FSB) was killed and then restarted.   Although the behavior of all agents was not characterized, we expect most "supply thread" agents to exhibit similar behavior as they contain a similar complement of plugins.   Upon rehydration the following known bugs occur:
 <ul>
-  <li>Bug #1847 - After persistance, no servlet response<br>
+  <li>Bug #1847 - After persistance, no servlet response (fixed in 9.4.1.1)<br>
   </li>
-  <li>Bug #1850 - During rehydration - Illegal rescind of a task that is connected to a workflow<br>
+  <li>Bug #1850 - During rehydration - Illegal rescind of a task that
+	is connected to a workflow (fixed in 9.4.1.1) <br>
   </li>
-  <li>Bug #1938 - Upon 47-FSB rehydration, negative days_spanned ERROR at 123-MSB<br>
+  <li>Bug #1938 - Upon 47-FSB rehydration, negative days_spanned ERROR
+	at 123-MSB (fixed in 9.4.1.1) <br>
   </li>
 </ul>
      These bugs occured after quiescence, but 1847 and 1850 were also observed while restarting in the midst of processing.
@@ -32,7 +34,7 @@
 <h3>Restart reconciliation bug:</h3>
 This bug occurs if an agent runs with persistence, is killed, and then restarted and rehydrated with its prior state.  The restarted agent only reconciles its blackboard with the agents that exist at the restart time, and fails to reconcile with agents that are created afterwards.
 <p>
-This is bug #1936, which will be fixed in the next release.
+This is bug #1936, which will be fixed in the next release (fixed in 9.4.1.1).
 <p>
 
 
@@ -74,6 +76,37 @@ on these bugs, see the CSMART Release Notes for that release.
 <h3>Following bugs in 9.4.1 were fixed in 9.4.1.1:</h3>
 <ul>
   <li>Bug 1803: Query/DetailRequest can result in cross agent references to the same object. This primarily affected the propagation of OrgActivity changes.</li>
+  <li> Bug 1847: After persist, no servlet response </li>
+  <li> Bug 1850: During rehydration - Illegal rescind of unconnected task </li>
+  <li> Bug 1874: Make -D args not editable </li>
+  <li> Bug 1875: (see bugzilla) </li>
+  <li> Bug 1878,1914: Society monitor needs cleanup </li>
+  <li> Bug 1879: (see bugzilla) </li>
+  <li> Bug 1880,1913: helpfile cleanup </li>
+  <li> Bug 1882,1890,1894,1900,1902,1895,1899: whitespace problems </li>
+  <li> Bug 1883: deletable AssetData folder in an Agent </li>
+  <li> Bug 1885: null property in config builder </li>
+  <li> Bug 1888,1916,1906,1899,1895,1893,1894,1926,1928,1930,1912,1923: close dialog should imply cancel </li>
+  <li> Bug 1892: show orggroups only when meaningful </li>
+  <li> Bug 1901: (see bugzilla) </li>
+  <li> Bug 1902: npe in bad community.xml </li>
+  <li> Bug 1904: Correct bad error check </li>
+  <li> Bug 1905: disallow empty community attribute ids </li>
+  <li> Bug 1909: (see bugzilla) </li>
+  <li> Bug 1916: complain about unreadable/nonexistant files </li>
+  <li> Bug 1917: (see bugzilla) </li>
+  <li> Bug 1919,1918,1907,1881,1896: reasonable dialog titles </li>
+  <li> Bug 1921,1922: Limit debug output in some circumstances </li>
+  <li> Bug 1925,1910: fix help menu items </li>
+  <li> Bug 1929: (see bugzilla) </li>
+  <li> Bug 1936: (see bugzilla) </li>
+  <li> Bug 1938: negative days_spanned error </li>
+  <li> Bug 1944: MTS aspects </li>
+  <li> Bug 1945: (see bugzilla) </li>
+  <li> Bug 1955: (see bugzilla) </li>
+  <li> Bug 1964: (see bugzilla) </li>
+  <li> Bug 1969: (see bugzilla) </li>
+
 <p>
 
 </body>
