@@ -27,6 +27,19 @@
   </li>
 </ul>
      These bugs occured after quiescence, but 1847 and 1850 were also observed while restarting in the midst of processing.
-<br>
+<p>
+
+<h3>Restart reconciliation bug:</h3>
+This bug occurs if an agent runs with persistence, is killed, and then restarted and rehydrated with its prior state.  The restarted agent only reconciles its blackboard with the agents that exist at the restart time, and fails to reconcile with agents that are created afterwards.
+<p>
+This is bug #1936, which will be fixed in the next release.
+<p>
+
+<h3>Windows AppServer kill doesn't automatically kill child processes:</h3>
+Bug #1662 is due to a Windows JVM change from JDK 1.3 to 1.4.  If the user "CTRL-C"s an AppServer that is currently running nodes, these child nodes are not automatically killed by the dying AppServer JVM process.
+<p>
+Before killing an AppServer, Windows users should be careful to either make sure that CSMART has killed all the nodes on that AppServer.  The Windows TaskManager can also be used to check for running "zombie" nodes and kill them.
+<p>
+
 </body>
 </html>
