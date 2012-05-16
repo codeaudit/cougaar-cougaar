@@ -9,13 +9,11 @@
 <h1>Errata for Cougaar 11.4.0 </h1>
 <br>
 <i>The following infos/problems/workarounds were detected/posted after
-Cougaar 11.4.0 was released.</i> There are other, less common open
-bugs. As always, they are visible at <a
-href="http://bugs.cougaar.org/">Cougaarforge Bugzilla</a>.<br>
+Cougaar 11.4.0 was released.</i>
 <br>
 <h2>Issues:</h2>
 <ul>
-  <li><a href="http://bugs.cougaar.org/show_bug.cgi?id=3918">Bug 3918</a>:
+  <li>Bug 3918:
       Java 1.5 prints an error:<pre>
         ERROR [XMLComponentInitializerServiceComponent] - 
           Unable to load XMLComponentInitializer
@@ -25,17 +23,17 @@ href="http://bugs.cougaar.org/">Cougaarforge Bugzilla</a>.<br>
       </pre>
       See the above bug report for a one-line fix to the
       "configs/common/SimpleAgent.xsl" template file.
-  <li><a href="http://bugs.cougaar.org/show_bug.cgi?id=3726">Bug 3726</a>:
+  <li>Bug 3726:
       If a target of your relay is an ABA, it is possible to get a
       flood of messages. To avoid problems, ensure that the targets list
       at the target agents is empty, or your Relay.Target
       implementation is a different class than your Relay.Source.</li>
-  <li><a href="http://bugs.cougaar.org/show_bug.cgi?id=3782">Bug 3782</a>:
+  <li>Bug 3782:
       If you restart a society from persistence, some odd "orphan"
       tasks seem to appear. This is very rare.</li>
-  <li><a href="http://bugs.cougaar.org/show_bug.cgi?id=3881">Bug 3881</a>:
+  <li>Bug 3881:
       INI file support will likely be dropped for release 12.0.</li>
-  <li><a href="http://bugs.cougaar.org/show_bug.cgi?id=3907#c7">Bug 3907</a>:
+  <li>Bug 3907:
       Replicated WP servers may fail to find their peer servers at
       startup.  This can occur if the initial WP server entries
       contain partial information, for example if they are non-empty
